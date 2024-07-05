@@ -25,6 +25,7 @@ copyConfigs(){
  cp .vimrc ~/
  cp .bash_profile ~/
  cp .bashrc ~/
+ cp .environment ~/
  cp .bash_prompt ~/
  cp .bash_aliases ~/
 

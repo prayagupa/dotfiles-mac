@@ -40,7 +40,7 @@ The script will:
 dotfiles-mac/
 ├── god-manifestation.sh   # bootstrap entrypoint
 ├── .vimrc                 # Vim config (vim-plug)
-├── .zshrc                 # Zsh config
+├── .zshrc                 # Zsh config (primary shell config)
 ├── .bashrc / .bash_*      # Bash fallback configs
 ├── .gitconfig             # Git config
 ├── .environment           # Exported env vars
@@ -50,11 +50,67 @@ dotfiles-mac/
 └── .emacs.d/              # Emacs config (legacy)
 ```
 
+## Docs
+
+| Doc | Covers |
+|---|---|
+| [docs/shell.md](docs/shell.md) | zsh, Starship prompt, fzf, zoxide, direnv |
+| [docs/editor.md](docs/editor.md) | Neovim, Vim, vim-plug, WezTerm, Nerd Font |
+| [docs/cli-tools.md](docs/cli-tools.md) | ripgrep, fd, bat, eza, git-delta, gh, tmux, jq, mise, Homebrew |
+
 ## Editor
 
 `C-n` — toggle file explorer
 
 ![](ide.png)
+
+## Updating your local machine
+
+After pulling the latest dotfiles from the repo, re-run the bootstrap to apply changes:
+
+```bash
+cd dotfiles-mac/
+git pull
+./god-manifestation.sh
+# restart terminal
+```
+
+Or apply individual pieces manually:
+
+```bash
+# Prompt config only
+cp .config/starship.toml ~/.config/starship.toml
+
+# Shell configs only
+cp .bash_profile ~/.bash_profile && source ~/.bash_profile
+cp .bashrc ~/.bashrc && source ~/.bashrc
+
+# Vim plugins
+vim +PlugUpdate +qall
+
+# Homebrew packages
+brew bundle          # if you add a Brewfile later
+brew upgrade
+```
+
+## Prompt (Starship)
+
+The old `.bash_prompt` (Solarized bash PS1) has been replaced by [Starship](https://starship.rs). Config lives in [.config/starship.toml](.config/starship.toml) and mirrors the original look:
+
+- `user` in yellow, red when root
+- `hostname` in red (SSH only)
+- `directory` in green
+- `branch` in purple with `+!?$` status flags + ahead/behind counts
+
+To activate in an existing shell session:
+
+```bash
+# zsh
+echo 'eval "$(starship init zsh)"' >> ~/.zshrc && source ~/.zshrc
+
+# bash
+echo 'eval "$(starship init bash)"' >> ~/.bash_profile && source ~/.bash_profile
+```
 
 ## General dotfiles
 

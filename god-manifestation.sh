@@ -25,7 +25,7 @@ backupDotfiles() {
 
   local targets=(
     ~/.zshrc ~/.zshenv ~/.zprofile
-    ~/.bashrc ~/.bash_profile ~/.bash_aliases ~/.bash_prompt
+    ~/.bashrc ~/.bash_aliases
     ~/.vimrc ~/.vim
     ~/.config/nvim
     ~/.gitconfig
@@ -47,24 +47,14 @@ copyConfigs() {
 
   local files=(
     .vimrc
-    .bashrc
-    .bash_profile
+    .zshrc
     .bash_aliases
-    .bash_prompt
     .environment
   )
 
   for f in "${files[@]}"; do
     [[ -f "$DOTFILES_DIR/$f" ]] && cp "$DOTFILES_DIR/$f" ~/ && log "  → ~/$f"
   done
-
-  # zsh configs (create stubs if not in repo yet)
-  if [[ -f "$DOTFILES_DIR/.zshrc" ]]; then
-    cp "$DOTFILES_DIR/.zshrc" ~/
-    log "  → ~/.zshrc"
-  else
-    warn ".zshrc not found in repo — skipping"
-  fi
 
   # Neovim config
   if [[ -d "$DOTFILES_DIR/.config/nvim" ]]; then

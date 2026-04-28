@@ -141,7 +141,7 @@ installVimPlug() {
   # Headless plugin install for Vim
   if [[ -f ~/.vimrc ]]; then
     log "Running :PlugInstall (Vim) …"
-    vim +PlugInstall +PlugUpdate +qall 2>/dev/null || warn "Vim PlugInstall encountered issues."
+    vim -es -u ~/.vimrc +PlugInstall +PlugUpdate +'qa!' 2>/dev/null || warn "Vim PlugInstall encountered issues."
   fi
 
   # Headless plugin install for Neovim

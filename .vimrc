@@ -27,6 +27,25 @@ else
 endif
 
 " ==============================================================
+" =====================   vim-plug    ==========================
+" ==============================================================
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-syntastic/syntastic'
+Plug 'chrisbra/csv.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'github/copilot.vim'
+
+" === Markdown
+Plug 'preservim/vim-markdown'
+
+call plug#end()
+
+" ==============================================================
 " =====================     NERDTree   =========================
 " ==============================================================
 "  @see :
@@ -49,33 +68,17 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 let g:airline#extensions#tabline#enabled = 1
-
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
-"
-" === pathogen
-"
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-execute pathogen#infect()
-
-" ========== let Vundle manage Vundle ===========================
-" ========== required! ========================================== 
-
-Bundle "scrooloose/nerdtree"
-
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'pangloss/vim-javascript'
-Plugin 'vim-syntastic/syntastic'
-" === CCV formatter
-Plugin 'chrisbra/csv.vim'
-
-""javascript
+" === javascript
 let g:javascript_plugin_jsdoc = 1
 
+" === markdown
+let g:vim_markdown_folding_disabled = 1     " disable folding by default
+let g:vim_markdown_conceal = 1              " hide markdown syntax for cleaner reading
+let g:vim_markdown_conceal_code_blocks = 0  " show code block markers
+let g:vim_markdown_follow_anchor = 1        " ge follows anchors in links
 
 let g:solarized_termcolors= 256
 "let g:solarized_termtrans = 16
@@ -95,7 +98,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-execute pathogen#infect()
 syntax on
 filetype plugin indent on
 

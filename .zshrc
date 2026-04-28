@@ -1,5 +1,10 @@
 # .zshrc — loaded for every interactive zsh session
 
+# ── Terminal font size ───────────────────────────────────────
+if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
+    osascript -e 'tell application "Terminal" to set font size of front window to 16' &>/dev/null
+fi
+
 # ── Source shared configs ────────────────────────────────────
 [[ -f ~/.bash_aliases  ]] && source ~/.bash_aliases
 [[ -f ~/.environment   ]] && source ~/.environment
